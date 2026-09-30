@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_spacing.dart';
 import '../../core/constants/app_text_styles.dart';
-import '../../providers/cart_provider.dart';
-import '../../widgets/cart/floating_cart_bar.dart';
+// import '../../providers/cart_provider.dart';
+// import '../../widgets/cart/floating_cart_bar.dart';
 import '../../widgets/common/offline_banner.dart';
 
 /// Hosts the five bottom-navigation tabs, each with its own navigation stack.
@@ -16,15 +16,15 @@ class MainShell extends StatelessWidget {
   final StatefulNavigationShell shell;
 
   static const _cartTab = 3;
-  static const _profileTab = 4;
+  // static const _profileTab = 4;
 
   void _onTap(int index) =>
       shell.goBranch(index, initialLocation: index == shell.currentIndex);
 
   @override
   Widget build(BuildContext context) {
-    final showCartBar =
-        shell.currentIndex != _cartTab && shell.currentIndex != _profileTab;
+    // final showCartBar =
+    //     shell.currentIndex != _cartTab && shell.currentIndex != _profileTab;
     return PopScope(
       // Back from any tab returns to Home before leaving the app.
       canPop: shell.currentIndex == 0,
@@ -39,13 +39,14 @@ class MainShell extends StatelessWidget {
               child: Stack(
                 children: [
                   shell,
-                  if (showCartBar)
-                    const Positioned(
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      child: FloatingCartBar(),
-                    ),
+                  // TODO: Restore floating cart bar when ready.
+                  // if (showCartBar)
+                  //   const Positioned(
+                  //     left: 0,
+                  //     right: 0,
+                  //     bottom: 0,
+                  //     child: FloatingCartBar(),
+                  //   ),
                 ],
               ),
             ),
@@ -84,7 +85,9 @@ class _BottomNav extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cartCount = ref.watch(cartCountProvider);
+    // TODO: Restore cart badge when ready.
+    // final cartCount = ref.watch(cartCountProvider);
+    const cartCount = 0;
     return Container(
       decoration: const BoxDecoration(
         color: AppColors.surface,

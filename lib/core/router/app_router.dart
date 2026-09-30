@@ -2,34 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../models/address.dart';
+// import '../../models/address.dart';
 import '../../models/auth_session.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/core_providers.dart';
-import '../../screens/address/address_form_screen.dart';
-import '../../screens/address/address_list_screen.dart';
+// import '../../screens/address/address_form_screen.dart';
+// import '../../screens/address/address_list_screen.dart';
 import '../../screens/auth/forgot_password_screen.dart';
 import '../../screens/auth/login_screen.dart';
 import '../../screens/auth/otp_verification_screen.dart';
 import '../../screens/auth/register_screen.dart';
 import '../../screens/auth/reset_password_screen.dart';
-import '../../screens/cart/cart_screen.dart';
+// import '../../screens/cart/cart_screen.dart';
 import '../../screens/category/categories_screen.dart';
 import '../../screens/checkout/checkout_screen.dart';
 import '../../screens/checkout/order_success_screen.dart';
-import '../../screens/checkout/payment_screen.dart';
+// import '../../screens/checkout/payment_screen.dart';
 import '../../screens/home/home_screen.dart';
 import '../../screens/notifications/notifications_screen.dart';
 import '../../screens/onboarding/onboarding_screen.dart';
-import '../../screens/orders/order_details_screen.dart';
-import '../../screens/orders/order_tracking_screen.dart';
-import '../../screens/orders/orders_screen.dart';
+// import '../../screens/orders/order_details_screen.dart';
+// import '../../screens/orders/order_tracking_screen.dart';
+// import '../../screens/orders/orders_screen.dart';
 import '../../screens/product/product_details_screen.dart';
 import '../../screens/product/product_listing_screen.dart';
 import '../../screens/profile/edit_profile_screen.dart';
 import '../../screens/profile/info_screen.dart';
 import '../../screens/profile/profile_screen.dart';
-import '../../screens/search/search_screen.dart';
+// import '../../screens/search/search_screen.dart';
+import '../../screens/common/coming_soon_screen.dart';
 import '../../screens/settings/settings_screen.dart';
 import '../../screens/shell/main_shell.dart';
 import '../../screens/splash/splash_screen.dart';
@@ -111,13 +112,36 @@ final routerProvider = Provider<GoRouter>((ref) {
             ],
           ),
           StatefulShellBranch(routes: [tab(AppRoutes.categories, const CategoriesScreen())]),
-          StatefulShellBranch(routes: [tab(AppRoutes.search, const SearchScreen())]),
-          StatefulShellBranch(routes: [tab(AppRoutes.cart, const CartScreen())]),
+          // TODO: Restore Search tab when ready.
+          // StatefulShellBranch(routes: [tab(AppRoutes.search, const SearchScreen())]),
+          StatefulShellBranch(
+            routes: [
+              tab(
+                AppRoutes.search,
+                const ComingSoonScreen(title: 'Search', icon: Icons.search_rounded),
+              ),
+            ],
+          ),
+          // TODO: Restore Cart tab when ready.
+          // StatefulShellBranch(routes: [tab(AppRoutes.cart, const CartScreen())]),
+          StatefulShellBranch(
+            routes: [
+              tab(
+                AppRoutes.cart,
+                const ComingSoonScreen(title: 'Cart', icon: Icons.shopping_bag_rounded),
+              ),
+            ],
+          ),
           StatefulShellBranch(routes: [tab(AppRoutes.profile, const ProfileScreen())]),
         ],
       ),
 
-      GoRoute(path: AppRoutes.location, builder: (_, _) => const AddressListScreen(selectMode: true)),
+      // GoRoute(path: AppRoutes.location, builder: (_, _) => const AddressListScreen(selectMode: true)),
+      GoRoute(
+        path: AppRoutes.location,
+        builder: (_, _) =>
+            const ComingSoonScreen(title: 'Select location', icon: Icons.location_on_rounded),
+      ),
       GoRoute(
         path: '/category/:id',
         builder: (_, state) => ProductListingScreen(categoryId: state.pathParameters['id']!),
@@ -127,6 +151,25 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, state) => ProductDetailsScreen(productId: state.pathParameters['id']!),
       ),
       GoRoute(path: AppRoutes.wishlist, builder: (_, _) => const WishlistScreen()),
+      // TODO: Restore address screens when ready.
+      GoRoute(
+        path: AppRoutes.addresses,
+        builder: (_, _) =>
+            const ComingSoonScreen(title: 'My addresses', icon: Icons.location_on_rounded),
+        routes: [
+          GoRoute(
+            path: 'new',
+            builder: (_, _) =>
+                const ComingSoonScreen(title: 'Add address', icon: Icons.location_on_rounded),
+          ),
+          GoRoute(
+            path: 'edit',
+            builder: (_, _) =>
+                const ComingSoonScreen(title: 'Edit address', icon: Icons.location_on_rounded),
+          ),
+        ],
+      ),
+      /*
       GoRoute(
         path: AppRoutes.addresses,
         builder: (_, _) => const AddressListScreen(),
@@ -139,11 +182,41 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
         ],
       ),
+      */
       GoRoute(path: AppRoutes.checkout, builder: (_, _) => const CheckoutScreen()),
+      // TODO: Restore payment screen when ready.
+      // GoRoute(
+      //   path: '/payment/:id',
+      //   builder: (_, state) => PaymentScreen(orderId: state.pathParameters['id']!),
+      // ),
       GoRoute(
         path: '/payment/:id',
-        builder: (_, state) => PaymentScreen(orderId: state.pathParameters['id']!),
+        builder: (_, _) =>
+            const ComingSoonScreen(title: 'Payment', icon: Icons.payments_rounded),
       ),
+      // TODO: Restore order management screens when ready.
+      GoRoute(
+        path: AppRoutes.orders,
+        builder: (_, _) =>
+            const ComingSoonScreen(title: 'My orders', icon: Icons.receipt_long_rounded),
+        routes: [
+          GoRoute(
+            path: ':id',
+            builder: (_, _) =>
+                const ComingSoonScreen(title: 'Order details', icon: Icons.receipt_long_rounded),
+            routes: [
+              GoRoute(
+                path: 'track',
+                builder: (_, _) => const ComingSoonScreen(
+                  title: 'Track order',
+                  icon: Icons.local_shipping_rounded,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      /*
       GoRoute(
         path: AppRoutes.orders,
         builder: (_, _) => const OrdersScreen(),
@@ -161,6 +234,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
         ],
       ),
+      */
       GoRoute(path: AppRoutes.notifications, builder: (_, _) => const NotificationsScreen()),
       GoRoute(path: AppRoutes.settings, builder: (_, _) => const SettingsScreen()),
       GoRoute(path: AppRoutes.editProfile, builder: (_, _) => const EditProfileScreen()),
