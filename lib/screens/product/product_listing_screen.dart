@@ -9,7 +9,7 @@ import '../../core/router/app_routes.dart';
 import '../../models/product_query.dart';
 import '../../providers/catalog_providers.dart';
 import '../../providers/product_list_provider.dart';
-import '../../widgets/cart/floating_cart_bar.dart';
+// import '../../widgets/cart/floating_cart_bar.dart';
 import '../../widgets/common/empty_state_view.dart';
 import '../../widgets/common/error_view.dart';
 import '../../widgets/common/skeletons.dart';
@@ -158,12 +158,13 @@ class _ProductListingScreenState extends ConsumerState<ProductListingScreen> {
               },
             ),
           ),
-          const Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: SafeArea(top: false, child: FloatingCartBar()),
-          ),
+          // TODO: Restore floating cart bar when ready.
+          // const Positioned(
+          //   left: 0,
+          //   right: 0,
+          //   bottom: 0,
+          //   child: SafeArea(top: false, child: FloatingCartBar()),
+          // ),
         ],
       ),
     );

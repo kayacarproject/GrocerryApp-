@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+// import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_spacing.dart';
 import '../../core/constants/app_text_styles.dart';
-import '../../core/network/api_exception.dart';
-import '../../core/router/app_routes.dart';
-import '../../core/utils/extensions.dart';
+// import '../../core/network/api_exception.dart';
+// import '../../core/router/app_routes.dart';
+// import '../../core/utils/extensions.dart';
 import '../../models/product.dart';
 import '../../providers/address_provider.dart';
-import '../../providers/cart_provider.dart';
+// import '../../providers/cart_provider.dart';
 import '../../providers/catalog_providers.dart';
 import '../../providers/recently_viewed_provider.dart';
-import '../../widgets/common/app_button.dart';
+// import '../../widgets/common/app_button.dart';
 import '../../widgets/common/app_card.dart';
 import '../../widgets/common/error_view.dart';
 import '../../widgets/common/skeletons.dart';
-import '../../widgets/product/add_to_cart_button.dart';
+// import '../../widgets/product/add_to_cart_button.dart';
 import '../../widgets/product/price_view.dart';
 import '../../widgets/product/product_rail.dart';
 import '../../widgets/product/wishlist_button.dart';
@@ -96,21 +96,22 @@ class _DetailsView extends ConsumerWidget {
 
   final Product product;
 
-  Future<void> _buyNow(BuildContext context, WidgetRef ref) async {
-    try {
-      if (ref.read(cartQuantityProvider(product.id)) == 0) {
-        await ref.read(cartProvider.notifier).add(product);
-      }
-      if (context.mounted) context.push(AppRoutes.checkout);
-    } catch (error) {
-      if (context.mounted) context.showSnack(ApiException.messageOf(error), isError: true);
-    }
-  }
+  // TODO: Restore add to cart / buy now when ready.
+  // Future<void> _buyNow(BuildContext context, WidgetRef ref) async {
+  //   try {
+  //     if (ref.read(cartQuantityProvider(product.id)) == 0) {
+  //       await ref.read(cartProvider.notifier).add(product);
+  //     }
+  //     if (context.mounted) context.push(AppRoutes.checkout);
+  //   } catch (error) {
+  //     if (context.mounted) context.showSnack(ApiException.messageOf(error), isError: true);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final related = ref.watch(relatedProductsProvider(product.id));
-    final cartCount = ref.watch(cartCountProvider);
+    // final cartCount = ref.watch(cartCountProvider);
     final imageHeight = (MediaQuery.sizeOf(context).width * 0.95).clamp(260.0, 460.0);
 
     return Scaffold(
@@ -123,17 +124,17 @@ class _DetailsView extends ConsumerWidget {
             backgroundColor: AppColors.surface,
             actions: [
               WishlistButton(product: product, size: 20, filledBackground: false),
-              IconButton(
-                tooltip: 'Cart, $cartCount items',
-                onPressed: () => context.go(AppRoutes.cart),
-                icon: Badge(
-                  isLabelVisible: cartCount > 0,
-                  label: Text('$cartCount'),
-                  backgroundColor: AppColors.accent,
-                  textColor: AppColors.textPrimary,
-                  child: const Icon(Icons.shopping_bag_outlined),
-                ),
-              ),
+              // IconButton(
+              //   tooltip: 'Cart, $cartCount items',
+              //   onPressed: () => context.go(AppRoutes.cart),
+              //   icon: Badge(
+              //     isLabelVisible: cartCount > 0,
+              //     label: Text('$cartCount'),
+              //     backgroundColor: AppColors.accent,
+              //     textColor: AppColors.textPrimary,
+              //     child: const Icon(Icons.shopping_bag_outlined),
+              //   ),
+              // ),
               AppSpacing.gapSm,
             ],
             flexibleSpace: FlexibleSpaceBar(
@@ -186,10 +187,10 @@ class _DetailsView extends ConsumerWidget {
           const SliverToBoxAdapter(child: SizedBox(height: AppSpacing.xxl)),
         ],
       ),
-      bottomNavigationBar: _BottomActions(
-        product: product,
-        onBuyNow: () => _buyNow(context, ref),
-      ),
+      // bottomNavigationBar: _BottomActions(
+      //   product: product,
+      //   onBuyNow: () => _buyNow(context, ref),
+      // ),
     );
   }
 }
@@ -407,6 +408,8 @@ class _InfoTable extends StatelessWidget {
   }
 }
 
+// TODO: Restore add to cart / buy now bar when ready.
+/*
 class _BottomActions extends StatelessWidget {
   const _BottomActions({required this.product, required this.onBuyNow});
 
@@ -447,3 +450,4 @@ class _BottomActions extends StatelessWidget {
     );
   }
 }
+*/

@@ -6,9 +6,10 @@ import '../../core/constants/app_spacing.dart';
 import '../../core/constants/app_text_styles.dart';
 import '../../core/router/app_routes.dart';
 import '../../core/utils/launcher.dart';
-import '../../models/payment.dart';
+// import '../../models/payment.dart';
 import '../../widgets/common/app_card.dart';
-import '../../widgets/order/payment_method_style.dart';
+import '../../widgets/common/empty_state_view.dart';
+// import '../../widgets/order/payment_method_style.dart';
 
 /// Static informational pages: help, payments, privacy, terms, about.
 class InfoScreen extends StatelessWidget {
@@ -87,6 +88,16 @@ class InfoScreen extends StatelessWidget {
       ),
   ];
 
+  // TODO: Restore payment methods when ready.
+  List<Widget> _payments() => [
+    const EmptyStateView(
+      icon: Icons.payments_rounded,
+      title: 'Coming Soon',
+      message: "We're working on it. Stay tuned!",
+    ),
+  ];
+
+  /*
   List<Widget> _payments() => [
     Text('Supported payment methods', style: AppTextStyles.title),
     AppSpacing.gapMd,
@@ -129,6 +140,7 @@ class InfoScreen extends StatelessWidget {
       ),
     ),
   ];
+  */
 
   List<Widget> _document(List<(String, String)> sections) => [
     Text('Last updated: 1 September 2026', style: AppTextStyles.caption),

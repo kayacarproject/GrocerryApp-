@@ -12,7 +12,7 @@ import '../../providers/wishlist_provider.dart';
 import '../../widgets/common/async_value_view.dart';
 import '../../widgets/common/empty_state_view.dart';
 import '../../widgets/common/skeletons.dart';
-import '../../widgets/product/add_to_cart_button.dart';
+// import '../../widgets/product/add_to_cart_button.dart';
 import '../../widgets/product/product_list_tile.dart';
 
 class WishlistScreen extends ConsumerWidget {
@@ -85,7 +85,8 @@ class WishlistScreen extends ConsumerWidget {
                               icon: const Icon(Icons.delete_outline_rounded, color: AppColors.textSecondary),
                               onPressed: () => _remove(context, ref, item),
                             ),
-                            AddToCartButton(product: item.product),
+                            // TODO: Restore add to cart when ready.
+                            // AddToCartButton(product: item.product),
                           ],
                         ),
                       ),

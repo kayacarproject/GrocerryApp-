@@ -7,7 +7,7 @@ import '../../core/constants/app_text_styles.dart';
 import '../../core/router/app_routes.dart';
 import '../../models/product.dart';
 import '../common/app_image.dart';
-import 'add_to_cart_button.dart';
+// import 'add_to_cart_button.dart';
 import 'price_view.dart';
 import 'wishlist_button.dart';
 
@@ -103,7 +103,9 @@ class ProductListTile extends StatelessWidget {
                         Expanded(
                           child: PriceView(price: product.price, mrp: product.mrp),
                         ),
-                        trailing ?? AddToCartButton(product: product),
+                        // TODO: Restore add to cart when ready.
+                        // trailing ?? AddToCartButton(product: product),
+                        ?trailing,
                       ],
                     ),
                   ],
