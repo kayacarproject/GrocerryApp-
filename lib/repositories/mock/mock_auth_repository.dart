@@ -51,7 +51,7 @@ class MockAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<OtpChallenge> register({
+  Future<void> register({
     required String name,
     required String email,
     required String phone,
@@ -71,8 +71,7 @@ class MockAuthRepository implements AuthRepository {
       phone: phone.trim(),
       createdAt: DateTime.now(),
     );
-    _pendingSignups[user.email] = (user: user, password: password);
-    return _challenge(user.email, OtpPurpose.registration);
+    _db.addUser(user, password);
   }
 
   @override

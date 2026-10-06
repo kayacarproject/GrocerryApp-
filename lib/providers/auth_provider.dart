@@ -58,7 +58,7 @@ class AuthNotifier extends Notifier<AuthState> {
     state = AuthState.authenticated(user);
   }
 
-  Future<OtpChallenge> register({
+  Future<void> register({
     required String name,
     required String email,
     required String phone,

@@ -11,8 +11,9 @@ abstract interface class AuthRepository {
 
   Future<User> login({required String email, required String password});
 
-  /// Creates the account and sends an email verification code.
-  Future<OtpChallenge> register({
+  /// Creates the account. The user signs in afterwards with email + password.
+  // TODO: restore email OTP verification once SMTP is configured.
+  Future<void> register({
     required String name,
     required String email,
     required String phone,
@@ -68,19 +69,19 @@ class RemoteAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<OtpChallenge> register({
+  Future<void> register({
     required String name,
     required String email,
     required String phone,
     required String password,
   }) async {
-    _pendingSession = await _api.register(
+    // The returned session is discarded so the user logs in explicitly.
+    await _api.register(
       name: name,
       email: email,
       phone: phone,
       password: password,
     );
-    return _api.sendOtp(email: email, purpose: OtpPurpose.registration);
   }
 
   @override

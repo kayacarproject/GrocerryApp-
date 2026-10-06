@@ -51,13 +51,16 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     }
     setState(() => _loading = true);
     try {
-      final challenge = await ref.read(authProvider.notifier).register(
+      await ref.read(authProvider.notifier).register(
         name: _name.text.trim(),
         email: _email.text.trim(),
         phone: _phone.text.trim(),
         password: _password.text,
       );
-      if (mounted) context.push(AppRoutes.otp, extra: challenge);
+      if (!mounted) return;
+      context.showSnack('Account created! Please log in to continue.');
+      await Future<void>.delayed(const Duration(seconds: 2));
+      if (mounted) context.go(AppRoutes.login);
     } on ApiException catch (error) {
       if (!mounted) return;
       setState(() => _fieldErrors = error.fieldErrors);
