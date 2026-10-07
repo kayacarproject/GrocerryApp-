@@ -31,7 +31,7 @@ import '../../screens/profile/info_screen.dart';
 import '../../screens/profile/profile_screen.dart';
 // import '../../screens/search/search_screen.dart';
 import '../../screens/common/coming_soon_screen.dart';
-import '../../screens/settings/settings_screen.dart';
+// import '../../screens/settings/settings_screen.dart';
 import '../../screens/shell/main_shell.dart';
 import '../../screens/splash/splash_screen.dart';
 import '../../screens/wishlist/wishlist_screen.dart';
@@ -236,7 +236,13 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       */
       GoRoute(path: AppRoutes.notifications, builder: (_, _) => const NotificationsScreen()),
-      GoRoute(path: AppRoutes.settings, builder: (_, _) => const SettingsScreen()),
+      // TODO: Restore settings screen when ready.
+      // GoRoute(path: AppRoutes.settings, builder: (_, _) => const SettingsScreen()),
+      GoRoute(
+        path: AppRoutes.settings,
+        builder: (_, _) =>
+            const ComingSoonScreen(title: 'Settings', icon: Icons.settings_rounded),
+      ),
       GoRoute(path: AppRoutes.editProfile, builder: (_, _) => const EditProfileScreen()),
       GoRoute(
         path: '/info/:page',
